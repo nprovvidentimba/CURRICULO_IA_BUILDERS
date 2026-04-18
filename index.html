@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currículo | Noemi Provvidenti</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AOS Library for Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            /* Dark Theme (Default) */
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-color: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.3);
+            --border-color: #334155;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f8fafc;
+            --surface-color: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent-color: #0284c7;
+            --accent-glow: rgba(2, 132, 199, 0.1);
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 10px;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(to right, var(--text-primary), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Header & Theme Toggle */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 0;
+            background: rgba(var(--bg-color), 0.8);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .theme-toggle {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* Section 1: Hero */
+        #hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 120px;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 220px;
+            height: 220px;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transition: var(--transition);
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text p {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        .badge {
+            background: var(--accent-glow);
+            color: var(--accent-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* Section 2: Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: var(--border-color);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), #818cf8);
+            width: 0;
+            transition: width 1.5s ease-in-out;
+        }
+
+        /* Section 3: Experience */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .experience-card {
+            background: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .experience-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-date {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 600;
+        }
+
+        .experience-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* Section 4: Education & Courses */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .edu-card {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .edu-icon {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Section 5: Languages */
+        .languages-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+
+        .lang-item {
+            text-align: center;
+            width: 120px;
+        }
+
+        .circle-chart {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1rem;
+        }
+
+        svg.circle {
+            transform: rotate(-90deg);
+        }
+
+        .circle-bg {
+            fill: none;
+            stroke: var(--border-color);
+            stroke-width: 3;
+        }
+
+        .circle-fill {
+            fill: none;
+            stroke: var(--accent-color);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            transition: stroke-dashoffset 2s ease-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-text h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            section { padding: 50px 0; }
+        }
+
+        /* Custom Decorations */
+        .glow-sphere {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--accent-glow);
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-content">
+            <div class="logo">NOEMI P.</div>
+            <button class="theme-toggle" id="themeToggle" title="Alternar Tema">
+                <i data-lucide="moon" id="themeIcon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section 1: Hero -->
+        <section id="hero">
+            <div class="glow-sphere" style="top: 10%; left: 5%;"></div>
+            <div class="glow-sphere" style="bottom: 10%; right: 5%;"></div>
+            <div class="container hero-content">
+                <div class="profile-img-container" data-aos="zoom-in">
+                    <img src="./@profile.png" alt="Noemi Provvidenti" class="profile-img">
+                </div>
+                <div class="hero-text" data-aos="fade-up">
+                    <span class="badge">S&OP / IBP Specialist</span>
+                    <h1>Noemi Provvidenti</h1>
+                    <p>"Liderando o Planejamento Integrado e a Excelência em Supply Chain com foco em resultados estratégicos."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Skills -->
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Minhas Habilidades</h2>
+                <div class="skills-grid">
+                    <div class="skill-card" data-aos="fade-right" style="display: flex; align-items: center; justify-content: center; min-height: 400px;">
+                        <canvas id="skillsRadarChart"></canvas>
+                    </div>
+                    <div class="skill-list" style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div class="skill-card" data-aos="fade-left">
+                            <div class="skill-info">
+                                <span>S&OP / IBP Governance</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-percent="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-aos="fade-left" data-aos-delay="100">
+                            <div class="skill-info">
+                                <span>Demand Planning & Forecasting</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-percent="95"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-aos="fade-left" data-aos-delay="200">
+                            <div class="skill-info">
+                                <span>SAP & ERP Management</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-percent="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-aos="fade-left" data-aos-delay="300">
+                            <div class="skill-info">
+                                <span>KPI Analytics (SFA, Bias, OTIF)</span>
+                                <span>92%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-percent="92"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Professional Experience -->
+        <section id="experience">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Experiência Profissional</h2>
+                <div class="timeline">
+                    <!-- Item 1 -->
+                    <div class="timeline-item" data-aos="fade-up">
+                        <div class="timeline-marker"></div>
+                        <div class="experience-card">
+                            <h3>Coordenadora de Planejamento Integrado</h3>
+                            <span class="experience-date">Maio/2025 - Outubro/2025 | Savencia Fromage & Dairy</span>
+                            <p>Governança de S&OP/IBP, previsão colaborativa com métodos estatísticos e gestão de estoques de segurança e capacidade.</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="timeline-marker"></div>
+                        <div class="experience-card">
+                            <h3>Especialista em S&OP</h3>
+                            <span class="experience-date">Maio/2023 - Outubro/2024 | PHINIA INC</span>
+                            <p>Liderança na construção da demanda e governança de S&OP. Alinhamento entre Vendas, Produção e Suprimentos.</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="timeline-marker"></div>
+                        <div class="experience-card">
+                            <h3>Analista Sênior de Planejamento de Demanda</h3>
+                            <span class="experience-date">2012 - 2023 | Natura & Co / Avon / Leão (Coca-Cola)</span>
+                            <p>Longa trajetória em planejamento de demanda, KPIs de performance e integração de cadeia de suprimentos em grandes players.</p>
+                        </div>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                        <div class="timeline-marker"></div>
+                        <div class="experience-card">
+                            <h3>Analista Sênior de Planejamento e S&OP</h3>
+                            <span class="experience-date">1998 - 2012 | Sadia / BRF</span>
+                            <p>Planejamento de demanda para mercado interno, projeção de base e alinhamento de consenso em reuniões executivas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Education & Courses -->
+        <section id="education">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Formação & Certificações</h2>
+                <div class="education-grid">
+                    <!-- 2026 -->
+                    <div class="edu-card" data-aos="flip-left">
+                        <div class="edu-icon"><i data-lucide="book-open" size="40"></i></div>
+                        <h3>Pós-graduação: Tradutor e Intérprete de Libras</h3>
+                        <p>Faculdade Metropolitana</p>
+                        <span class="experience-date">2026 | Cursando</span>
+                    </div>
+                    <div class="edu-card" data-aos="flip-left" data-aos-delay="50">
+                        <div class="edu-icon"><i data-lucide="graduation-cap" size="40"></i></div>
+                        <h3>Pós-graduação: Ensino Superior e Metodologias Ativas</h3>
+                        <p>Faculdade Metropolitana</p>
+                        <span class="experience-date">2026 | Completo</span>
+                    </div>
+                    <!-- 2025 -->
+                    <div class="edu-card" data-aos="flip-left" data-aos-delay="100">
+                        <div class="edu-icon"><i data-lucide="database" size="40"></i></div>
+                        <h3>MBA em Análise de Dados</h3>
+                        <p>UNIFATELOS DE CAMPINAS</p>
+                        <span class="experience-date">2025</span>
+                    </div>
+                    <!-- 2024 -->
+                    <div class="edu-card" data-aos="flip-left" data-aos-delay="150">
+                        <div class="edu-icon"><i data-lucide="briefcase" size="40"></i></div>
+                        <h3>Pós-graduação em Administração e Inteligência Competitiva</h3>
+                        <p>Faculdade Metropolitana</p>
+                        <span class="experience-date">2024</span>
+                    </div>
+                    <div class="edu-card" data-aos="flip-left" data-aos-delay="200">
+                        <div class="edu-icon"><i data-lucide="users" size="40"></i></div>
+                        <h3>Comunicação Eficaz em Ambientes Corporativos</h3>
+                        <p>Faculdade Metropolitana</p>
+                        <span class="experience-date">2024</span>
+                    </div>
+                    <!-- 2019 -->
+                    <div class="edu-card" data-aos="flip-left" data-aos-delay="250">
+                        <div class="edu-icon"><i data-lucide="box" size="40"></i></div>
+                        <h3>DDMRP Planner</h3>
+                        <p>EPCS / Demand Driven Institute</p>
+                        <span class="experience-date">2019</span>
+                    </div>
+                    <!-- 2016 -->
+                    <div class="edu-card" data-aos="flip-left" data-aos-delay="300">
+                        <div class="edu-icon"><i data-lucide="award" size="40"></i></div>
+                        <h3>Certified S&OP Professional (CS&OP)</h3>
+                        <p>ACHAIN</p>
+                        <span class="experience-date">2016</span>
+                    </div>
+                    <div class="edu-card" data-aos="flip-left" data-aos-delay="350">
+                        <div class="edu-icon"><i data-lucide="trending-up" size="40"></i></div>
+                        <h3>Certified Demand Professional (CDFP)</h3>
+                        <p>ACHAIN</p>
+                        <span class="experience-date">2016</span>
+                    </div>
+                    <!-- 2006 -->
+                    <div class="edu-card" data-aos="flip-left" data-aos-delay="400">
+                        <div class="edu-icon"><i data-lucide="truck" size="40"></i></div>
+                        <h3>Bacharelado em Logística e Cadeia de Suprimentos</h3>
+                        <p>FATEC - SP</p>
+                        <span class="experience-date">2006</span>
+                    </div>
+                    <!-- Earlier -->
+                    <div class="edu-card" data-aos="flip-left" data-aos-delay="450">
+                        <div class="edu-icon"><i data-lucide="pie-chart" size="40"></i></div>
+                        <h3>Marketing Intensivo</h3>
+                        <p>ESPM</p>
+                        <span class="experience-date">1996</span>
+                    </div>
+                    <div class="edu-card" data-aos="flip-left" data-aos-delay="500">
+                        <div class="edu-icon"><i data-lucide="check-circle" size="40"></i></div>
+                        <h3>Total Quality Control (TQC)</h3>
+                        <p>Fundação Gerdau</p>
+                        <span class="experience-date">1996</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Languages -->
+        <section id="languages">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Idiomas</h2>
+                <div class="languages-container">
+                    <div class="lang-item" data-aos="zoom-in">
+                        <div class="circle-chart" style="position: relative;">
+                            <svg class="circle" viewBox="0 0 100 100">
+                                <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="circle-fill" cx="50" cy="50" r="45" data-offset="0"></circle>
+                            </svg>
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 800; font-size: 0.9rem;">Nativo</div>
+                        </div>
+                        <h3>Português</h3>
+                    </div>
+                    <div class="lang-item" data-aos="zoom-in" data-aos-delay="50">
+                        <div class="circle-chart" style="position: relative;">
+                            <svg class="circle" viewBox="0 0 100 100">
+                                <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="circle-fill" cx="50" cy="50" r="45" data-offset="0"></circle>
+                            </svg>
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 800; font-size: 0.9rem;">Nativo</div>
+                        </div>
+                        <h3>LIBRAS</h3>
+                    </div>
+                    <div class="lang-item" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="circle-chart" style="position: relative;">
+                            <svg class="circle" viewBox="0 0 100 100">
+                                <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="circle-fill" cx="50" cy="50" r="45" data-offset="45"></circle>
+                            </svg>
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 800; font-size: 0.9rem;">Avançado</div>
+                        </div>
+                        <h3>Inglês</h3>
+                    </div>
+                    <div class="lang-item" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="circle-chart" style="position: relative;">
+                            <svg class="circle" viewBox="0 0 100 100">
+                                <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="circle-fill" cx="50" cy="50" r="45" data-offset="120"></circle>
+                            </svg>
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 800; font-size: 0.9rem;">Interm.</div>
+                        </div>
+                        <h3>Espanhol</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="padding: 3rem 0; text-align: center; border-top: 1px solid var(--border-color);">
+        <p>&copy; 2024 Noemi Provvidenti. Todos os direitos reservados.</p>
+        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">nprovvidentimba@gmail.com</p>
+    </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+
+        function updateChartTheme() {
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            const textColor = isDark ? '#94a3b8' : '#475569';
+            const gridColor = isDark ? '#334155' : '#e2e8f0';
+            
+            if (window.skillsChart) {
+                window.skillsChart.options.scales.r.pointLabels.color = textColor;
+                window.skillsChart.options.scales.r.angleLines.color = gridColor;
+                window.skillsChart.options.scales.r.grid.color = gridColor;
+                window.skillsChart.update();
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            themeIcon.setAttribute('data-lucide', newTheme === 'dark' ? 'moon' : 'sun');
+            lucide.createIcons(); // Re-render icons
+            updateChartTheme();
+        });
+
+        // Radar Chart Initialization
+        const ctx = document.getElementById('skillsRadarChart').getContext('2d');
+        window.skillsChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['S&OP/IBP', 'Demanda', 'SAP/ERP', 'Analytics', 'Liderança', 'Estratégia'],
+                datasets: [{
+                    label: 'Nível de Proficiência',
+                    data: [95, 95, 90, 92, 85, 90],
+                    fill: true,
+                    backgroundColor: 'rgba(56, 189, 248, 0.2)',
+                    borderColor: '#38bdf8',
+                    pointBackgroundColor: '#38bdf8',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#38bdf8'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#334155' },
+                        grid: { color: '#334155' },
+                        pointLabels: {
+                            color: '#94a3b8',
+                            font: { size: 12, family: 'Outfit' }
+                        },
+                        ticks: { display: false },
+                        suggestedMin: 50,
+                        suggestedMax: 100
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+        updateChartTheme();
+
+        // Skill Bars Animation on Scroll
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bars = entry.target.querySelectorAll('.progress-fill');
+                    bars.forEach(bar => {
+                        const percent = bar.getAttribute('data-percent');
+                        bar.style.width = percent + '%';
+                    });
+                    
+                    const circles = entry.target.querySelectorAll('.circle-fill');
+                    circles.forEach(circle => {
+                        const offset = circle.getAttribute('data-offset');
+                        circle.style.strokeDashoffset = offset;
+                    });
+                }
+            });
+        }, observerOptions);
+
+        skillObserver.observe(document.getElementById('skills'));
+        skillObserver.observe(document.getElementById('languages'));
+    </script>
+</body>
+</html>
