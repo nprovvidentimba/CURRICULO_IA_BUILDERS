@@ -381,6 +381,36 @@
             z-index: -1;
             opacity: 0.5;
         }
+
+        /* Hero Contact */
+        .hero-contact {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-link:hover {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--accent-glow);
+        }
     </style>
 </head>
 
@@ -409,6 +439,16 @@
                     <h1>Noemi Provvidenti</h1>
                     <p>"Liderando o Planejamento Integrado e a Excelência em Supply Chain com foco em resultados
                         estratégicos."</p>
+                    <div class="hero-contact">
+                        <a href="tel:+5511979631676" class="contact-link">
+                            <i data-lucide="phone" size="18"></i>
+                            <span>+55 11 97963-1676</span>
+                        </a>
+                        <a href="mailto:nprovvidenti@gmail.com" class="contact-link">
+                            <i data-lucide="mail" size="18"></i>
+                            <span>nprovvidenti@gmail.com</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -655,7 +695,7 @@
 
     <footer style="padding: 3rem 0; text-align: center; border-top: 1px solid var(--border-color);">
         <p>&copy; 2024 Noemi Provvidenti. Todos os direitos reservados.</p>
-        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">nprovvidentimba@gmail.com</p>
+        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">nprovvidenti@gmail.com</p>
     </footer>
 
     <!-- AOS JS -->
